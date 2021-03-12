@@ -1,16 +1,12 @@
-package com.ZHA.server.basic;
+package com.ZHA.server.basic.ServerServlet;
 
-import java.io.*;
-import java.net.ServerSocket;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Date;
 
-/**
- *
- *对Server01 response部分的封装
- *
- */
-public class Response {
+public class ResponseX {
     //todo:返回协议的封装
     private int len;
     private Socket client;
@@ -19,7 +15,7 @@ public class Response {
     private String blank = " ";
     private String CRLF = "\r\n";
 
-    public Response (Socket client){
+    public ResponseX (Socket client){
         this.client = client;
     }
     public void addStatusCode(int statusCode){
@@ -37,7 +33,7 @@ public class Response {
         responseInfo.append("DATE").append(new Date()).append(CRLF);
         responseInfo.append("Server:").append("Server/0.0.1;charset=GBK").append(CRLF);
         responseInfo.append("Content-type:text/html").append(CRLF);
-        len = body.toString().length()+16;
+        len = body.toString().length()+responseInfo.toString().length();
         responseInfo.append("Content-length:").append(len).append(CRLF);
         responseInfo.append(CRLF);
     }

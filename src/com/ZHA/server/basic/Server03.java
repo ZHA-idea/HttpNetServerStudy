@@ -14,7 +14,7 @@ public class Server03 {
     int len;
     ServerSocket serverSocket;
     public static void main(String[] args) throws IOException {
-        Server02 server = new Server02();
+        Server03 server = new Server03();
         server.start();
         server.receive();
     }
@@ -33,7 +33,7 @@ public class Server03 {
             Socket client = serverSocket.accept();
             System.out.println("一个客户端连接成功");
             //todo:获取请求协议
-            Request request = new Request(client);
+            Request2 request = new Request2(client);
 
             System.out.println(request.requestInfo);
 
@@ -48,7 +48,8 @@ public class Server03 {
             response.append("</title>");
             response.append("</head>");
             response.append("<body>");
-            response.append("Test Succesful");
+            response.append("你好"+request.getParameter("uname"));
+            System.out.println("--------//"+request.getParameter("uname"));
             response.append("</body>");
             response.append("</html>");
             response.sentToBowser(200);
